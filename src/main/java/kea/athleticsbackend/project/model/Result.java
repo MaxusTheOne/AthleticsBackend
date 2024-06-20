@@ -17,6 +17,5 @@ public class Result {
     private String date;
     private String resultValue;
     @ManyToOne
-    @JoinColumn(name = "participant_id")
     private Discipline discipline;
 }

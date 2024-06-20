@@ -16,9 +16,8 @@ public class Discipline {
     private int id;
     private String name;
     private ResultType resultType;
-    @ManyToMany
+    @ManyToMany(mappedBy = "disciplines")
     private List<Participant> participants;
     @OneToMany
-    @JoinColumn(name = "discipline_id")
     private List<Result> results;
 }

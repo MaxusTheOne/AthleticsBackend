@@ -18,5 +18,8 @@ public class Participant {
     private int age;
     private String club;
     @ManyToMany
+    @JoinTable(name = "participant_disciplines",
+            joinColumns = @JoinColumn(name = "participant_id"),
+            inverseJoinColumns = @JoinColumn(name = "discipline_id"))
     private List<Discipline> disciplines;
 }
