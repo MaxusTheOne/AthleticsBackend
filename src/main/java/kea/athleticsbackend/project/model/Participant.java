@@ -14,7 +14,6 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String unit;
     private int age;
     private String club;
     @ManyToMany
@@ -22,4 +21,16 @@ public class Participant {
             joinColumns = @JoinColumn(name = "participant_id"),
             inverseJoinColumns = @JoinColumn(name = "discipline_id"))
     private List<Discipline> disciplines;
+
+    public Participant() {
+    }
+    public Participant(int participantId) {
+        this.id = participantId;
+    }
+
+    public Participant(String name, int age, String club) {
+        this.name = name;
+        this.age = age;
+        this.club = club;
+    }
 }
