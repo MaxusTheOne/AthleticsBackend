@@ -41,4 +41,24 @@ public class ResultService {
         resultRepository.save(resultRequestDTO.toResult(disciplineRepository, participantRepository));
     }
 
+    public void saveMultipleResults(List<ResultRequestDTO> resultRequestDTOs) {
+        for (ResultRequestDTO resultRequestDTO : resultRequestDTOs) {
+            resultRepository.save(resultRequestDTO.toResult(disciplineRepository, participantRepository));
+        }
+    }
+
+    public void updateResult(Long id, ResultRequestDTO resultRequestDTO) {
+        resultRepository.findById(id)
+                .map(result -> {
+                    result.setDiscipline(disciplineRepository.findById(resultRequestDTO.getDisciplineId()).orElseThrow(() -> new IllegalArgumentException("Discipline with id " + resultRequestDTO.getDisciplineId() + " not found")));
+                    result.setParticipant(participantRepository.findById(resultRequestDTO.getParticipantId()).orElseThrow(() -> new IllegalArgumentException("Participant with id " + resultRequestDTO.getParticipantId() + " not found")));
+                    result.setResultValue(resultRequestDTO.getResultValue());
+                    return resultRepository.save(result);
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Result with id " + id + " not found"));
+    }
+
+    public void deleteResult(Long id) {
+        resultRepository.deleteById(id);
+    }
 }

@@ -33,4 +33,19 @@ public class ParticipantService {
     }
 
 
+    public ParticipantResponseDTO updateParticipant(Long id, ParticipantRequestDTO participantRequestDTO) {
+        return participantRepository.findById(id)
+                //IDK why it uses a .map here, but if it works it works
+                .map(participant -> {
+                    participant.setName(participantRequestDTO.getName());
+                    participant.setAge(participantRequestDTO.getAge());
+                    participant.setClub(participantRequestDTO.getClub());
+                    return new ParticipantResponseDTO(participantRepository.save(participant));
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Participant with id " + id + " not found"));
+    }
+
+    public void deleteParticipant(Long id) {
+        participantRepository.deleteById(id);
+    }
 }

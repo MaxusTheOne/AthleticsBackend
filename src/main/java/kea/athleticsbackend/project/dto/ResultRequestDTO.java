@@ -15,8 +15,8 @@ import java.util.Optional;
 @Setter
 public class ResultRequestDTO {
 
-    private int disciplineId;
-    private int participantId;
+    private Long disciplineId;
+    private Long participantId;
     private String result;
     private String date;
     private String resultValue;
@@ -25,7 +25,7 @@ public class ResultRequestDTO {
     public ResultRequestDTO() {
     }
 
-    public ResultRequestDTO(int disciplineId, int participantId, String result, String date, String resultValue, String resultType) {
+    public ResultRequestDTO(Long disciplineId, Long participantId, String result, String date, String resultValue, String resultType) {
 
         this.disciplineId = disciplineId;
         this.participantId = participantId;

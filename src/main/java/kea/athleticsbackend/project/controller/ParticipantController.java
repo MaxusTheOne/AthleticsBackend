@@ -31,4 +31,14 @@ public class ParticipantController {
     public ParticipantResponseDTO saveParticipant(@RequestBody ParticipantRequestDTO participantRequestDTO) {
         return participantService.saveParticipant(participantRequestDTO);
     }
+
+    @PutMapping("/{id}")
+    public ParticipantResponseDTO updateParticipant(@PathVariable Long id, @RequestBody ParticipantRequestDTO participantRequestDTO) {
+        return participantService.updateParticipant(id, participantRequestDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteParticipant(@PathVariable Long id) {
+        participantService.deleteParticipant(id);
+    }
 }

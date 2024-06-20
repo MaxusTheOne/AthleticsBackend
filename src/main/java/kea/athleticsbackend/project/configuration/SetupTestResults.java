@@ -12,6 +12,6 @@ public class SetupTestResults {
     }
 
     public void setup(){
-        resultService.saveResult(new ResultRequestDTO(1, 2, "100m", "20-10-2020", "10.5", "Time"));
+        resultService.saveResult(new ResultRequestDTO(1L, 2L, "100m", "20-10-2020", "10.5", "Time"));
     }
 }

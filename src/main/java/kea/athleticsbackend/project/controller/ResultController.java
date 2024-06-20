@@ -1,9 +1,9 @@
 package kea.athleticsbackend.project.controller;
 
+import kea.athleticsbackend.project.dto.ResultRequestDTO;
 import kea.athleticsbackend.project.dto.ResultResponseDTO;
 import kea.athleticsbackend.project.service.ResultService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,13 +17,34 @@ public class ResultController {
         this.resultService = resultService;
     }
 
+    @GetMapping
     public List<ResultResponseDTO> getAllResults() {
         return resultService.getAll();
     }
 
-    public ResultResponseDTO getResultById(Long id) {
+    @GetMapping("/{id}")
+    public ResultResponseDTO getResultById(@PathVariable Long id) {
         return resultService.getById(id);
     }
 
+    @PostMapping
+    public void saveResult(@RequestBody ResultRequestDTO resultRequestDTO) {
+        resultService.saveResult(resultRequestDTO);
+    }
+
+    @PostMapping("/multiple")
+    public void saveMultipleResults(@RequestBody List<ResultRequestDTO> resultRequestDTOs) {
+        resultRequestDTOs.forEach(resultService::saveResult);
+    }
+
+    @PutMapping("/{id}")
+    public void updateResult(@PathVariable Long id, @RequestBody ResultRequestDTO resultRequestDTO) {
+        resultService.updateResult(id, resultRequestDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteResult(@PathVariable Long id) {
+        resultService.deleteResult(id);
+    }
 
 }
