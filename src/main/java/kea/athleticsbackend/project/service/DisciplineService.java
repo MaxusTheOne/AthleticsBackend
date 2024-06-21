@@ -2,6 +2,7 @@ package kea.athleticsbackend.project.service;
 
 import kea.athleticsbackend.project.dto.DisciplineRequestDTO;
 import kea.athleticsbackend.project.dto.DisciplineResponseDTO;
+import kea.athleticsbackend.project.model.Discipline;
 import kea.athleticsbackend.project.model.Result;
 import kea.athleticsbackend.project.repository.DisciplineRepository;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,14 @@ public class DisciplineService {
     }
 
     public List<DisciplineResponseDTO> getAllDisciplines() {
-        return disciplineRepository.findAll().stream()
+        List<DisciplineResponseDTO> disciplines = disciplineRepository.findAll().stream()
                 .map(discipline -> new DisciplineResponseDTO((long) discipline.getId(), discipline.getName(), discipline.getResultType(), discipline.getResults().stream().map(Result::getId).toList()))
-                .collect(java.util.stream.Collectors.toList());
+                .toList();
+        if (disciplines.isEmpty()) {
+            throw new IllegalArgumentException("No disciplines found");
+        } else {
+            return disciplines;
+        }
     }
 
     public DisciplineResponseDTO getById(Long id) {
@@ -45,4 +51,6 @@ public class DisciplineService {
     public void saveDiscipline(String s, String sprint) {
         createDiscipline(s, sprint);
     }
+
+
 }

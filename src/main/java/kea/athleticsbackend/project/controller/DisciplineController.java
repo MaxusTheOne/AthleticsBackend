@@ -19,8 +19,9 @@ public class DisciplineController {
     }
 
     @GetMapping("")
-    public List<DisciplineResponseDTO> getAllDisciplines() {
-        return disciplineService.getAllDisciplines();
+    public ResponseEntity<List<DisciplineResponseDTO>> getAllDisciplines() {
+        System.out.println("Getting all disciplines");
+        return ResponseEntity.ok(disciplineService.getAllDisciplines());
     }
 
     @GetMapping("/{id}")

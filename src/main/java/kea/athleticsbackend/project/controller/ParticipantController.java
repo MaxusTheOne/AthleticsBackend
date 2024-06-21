@@ -19,6 +19,7 @@ public class ParticipantController {
 
     @GetMapping
     public List<ParticipantResponseDTO> getAllParticipants() {
+        System.out.println("Getting all participants");
         return participantService.getAll();
     }
 
