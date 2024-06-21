@@ -23,13 +23,13 @@ public class DisciplineService {
 
     public List<DisciplineResponseDTO> getAllDisciplines() {
         return disciplineRepository.findAll().stream()
-                .map(discipline -> new DisciplineResponseDTO(discipline.getName(), discipline.getResultType(), discipline.getResults().stream().map(Result::getId).toList()))
+                .map(discipline -> new DisciplineResponseDTO((long) discipline.getId(), discipline.getName(), discipline.getResultType(), discipline.getResults().stream().map(Result::getId).toList()))
                 .collect(java.util.stream.Collectors.toList());
     }
 
     public DisciplineResponseDTO getById(Long id) {
         return disciplineRepository.findById(id)
-                .map(discipline -> new DisciplineResponseDTO(discipline.getName(), discipline.getResultType(), discipline.getResults().stream().map(Result::getId).toList()))
+                .map(discipline -> new DisciplineResponseDTO(id ,discipline.getName(), discipline.getResultType(), discipline.getResults().stream().map(Result::getId).toList()))
                 .orElseThrow(() -> new IllegalArgumentException("Discipline with id " + id + " not found"));
     }
 

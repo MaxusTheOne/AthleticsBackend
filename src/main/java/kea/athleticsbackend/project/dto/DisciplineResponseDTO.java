@@ -14,13 +14,15 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 public class DisciplineResponseDTO {
+    private Long id;
     private String disciplineName;
     private String disciplineType;
     private List<Integer> resultsId;
 
 
 
-    public DisciplineResponseDTO(String disciplineName, String disciplineType, List<Integer> resultsId) {
+    public DisciplineResponseDTO(Long id, String disciplineName, String disciplineType, List<Integer> resultsId) {
+        this.id = id;
         this.disciplineName = disciplineName;
         this.disciplineType = disciplineType;
         this.resultsId = resultsId;
