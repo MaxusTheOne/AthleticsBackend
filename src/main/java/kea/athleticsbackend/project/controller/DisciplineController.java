@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/discipline")
+@RequestMapping("/disciplines")
 public class DisciplineController {
 
     private final DisciplineService disciplineService;
@@ -32,5 +32,10 @@ public class DisciplineController {
     @PostMapping
     public ResponseEntity<DisciplineResponseDTO> addDiscipline(DisciplineRequestDTO discipline) {
         return ResponseEntity.ok(disciplineService.addDiscipline(discipline));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteDiscipline(@PathVariable long id) {
+        disciplineService.deleteDiscipline(id);
     }
 }

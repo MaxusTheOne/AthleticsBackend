@@ -36,6 +36,7 @@ public class ResultRequestDTO {
     }
 
     public Result toResult(DisciplineRepository disciplineRepository, ParticipantRepository participantRepository) {
+        if (disciplineId == null || participantId == null) return null;
         Optional<Discipline> discipline = disciplineRepository.findById((long) disciplineId);
         Optional<Participant> participant = participantRepository.findById((long) participantId);
         return discipline.flatMap(discipline1 -> participant.map(participant1 -> new Result(discipline1, participant1, result, resultType, date))).orElse(null);

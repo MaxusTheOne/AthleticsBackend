@@ -41,6 +41,7 @@ public class DisciplineService {
 
     // I know I do this differently in the other services, but you can't stop me
     public DisciplineResponseDTO addDiscipline(DisciplineRequestDTO discipline) {
+
         return new DisciplineResponseDTO( disciplineRepository.save(discipline.toDiscipline(resultService.getResultRepository())));
     }
 
@@ -53,4 +54,8 @@ public class DisciplineService {
     }
 
 
+    public void deleteDiscipline(long id) {
+        Discipline discipline = disciplineRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Discipline with id " + id + " not found"));
+        disciplineRepository.delete(discipline);
+    }
 }

@@ -3,12 +3,13 @@ package kea.athleticsbackend.project.controller;
 import kea.athleticsbackend.project.dto.ResultRequestDTO;
 import kea.athleticsbackend.project.dto.ResultResponseDTO;
 import kea.athleticsbackend.project.service.ResultService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/result")
+@RequestMapping("/results")
 public class ResultController {
 
     private final ResultService resultService;
@@ -18,8 +19,8 @@ public class ResultController {
     }
 
     @GetMapping
-    public List<ResultResponseDTO> getAllResults() {
-        return resultService.getAll();
+    public ResponseEntity<List<ResultResponseDTO>> getAllResults() {
+        return ResponseEntity.ok(resultService.getAll());
     }
 
     @GetMapping("/{id}")
@@ -29,6 +30,9 @@ public class ResultController {
 
     @PostMapping
     public void saveResult(@RequestBody ResultRequestDTO resultRequestDTO) {
+        if (resultRequestDTO.getDisciplineId() == null || resultRequestDTO.getParticipantId() == null) {
+            throw new IllegalArgumentException("DisciplineId and ParticipantId must be provided");
+        }
         resultService.saveResult(resultRequestDTO);
     }
 

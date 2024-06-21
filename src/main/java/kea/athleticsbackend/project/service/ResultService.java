@@ -25,15 +25,17 @@ public class ResultService {
     }
 
 
+
+    //This right here made me realize I made some spaghetti
     public List<ResultResponseDTO> getAll() {
         return resultRepository.findAll().stream()
-                .map(result -> new ResultResponseDTO((long) result.getId(),result.getDiscipline().getName(), result.getParticipant().getName(), result.getResultValue()))
+                .map(result -> new ResultResponseDTO((long) result.getId(),result.getDiscipline().getResultType(), result.getParticipant().getName(), result.getResultValue()))
                 .collect(java.util.stream.Collectors.toList());
     }
 
     public ResultResponseDTO getById(Long id) {
         return resultRepository.findById(id)
-                .map(result -> new ResultResponseDTO(id,result.getDiscipline().getName(), result.getParticipant().getName(), result.getResultValue()))
+                .map(result -> new ResultResponseDTO(id,result.getDiscipline().getResultType(), result.getParticipant().getName(), result.getResultValue()))
                 .orElseThrow(() -> new IllegalArgumentException("Result with id " + id + " not found"));
     }
 

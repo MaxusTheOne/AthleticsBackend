@@ -33,8 +33,8 @@ public class DisciplineResponseDTO {
     public DisciplineResponseDTO(Discipline discipline) {
         this.disciplineName = discipline.getName();
         this.disciplineType = discipline.getResultType();
-        assert discipline.getResults() != null;
-        this.resultsId = discipline.getResults().stream().map(Result::getId).toList();
+        if (discipline.getResults() != null) this.resultsId = discipline.getResults().stream().map(Result::getId).toList();
+        else this.resultsId = null;
 
     }
 
